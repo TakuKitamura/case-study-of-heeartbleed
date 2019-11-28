@@ -64,10 +64,10 @@ def main():
     exec_file_path = './' + gen_dir_path + '/c_heartbleed.out'
     command = ['gcc', gen_c_heartbleed_path_path, '-o', exec_file_path]
     print('###command###')
-    print('$ ' + ' '.join(command))
+    print(' '.join(command))
 
     print('````c_heartbleed.c\n{}\n```\n'.format(c_heartbleed))
-    # print('###output###')
+    print('###output###')
     try:
         res = subprocess.check_output(command, stderr=subprocess.STDOUT).decode('utf-8', 'ignore')
         print(res)
@@ -76,7 +76,7 @@ def main():
 
     command = [exec_file_path]
     print('###command###')
-    print('$ ' + ' '.join(command))
+    print(' '.join(command))
     try:
         res = subprocess.check_output(command, stderr=subprocess.STDOUT).decode('utf-8', 'ignore')
         print(res)
@@ -96,9 +96,9 @@ def main():
     exec_file_path = './' + gen_dir_path + '/rust_heartbleed.out'
     command = ['rustc', gen_rust_heartbleed_path, '-o', exec_file_path]
     print('###command###')
-    print('$ ' + ' '.join(command))
+    print(' '.join(command))
     print('````rust_heartbleed.rs\n{}\n```\n'.format(rust_heartbleed))
-    # print('###output###')
+    print('###output###')
     try:
         res = subprocess.check_output(command, stderr=subprocess.STDOUT).decode('utf-8', 'ignore')
         print(res)
@@ -107,7 +107,7 @@ def main():
 
     command = [exec_file_path]
     print('###command###')
-    print('$ ' + ' '.join(command))
+    print(' '.join(command))
     try:
         res = subprocess.check_output(command, stderr=subprocess.STDOUT).decode('utf-8', 'ignore')
         print(res)
@@ -129,9 +129,9 @@ def main():
     exec_file_path = './' + gen_dir_path + '/fstar_heartbleed.out'
     command = ['krml', '-verify', '-drop', 'WasmSupport', '-drop', 'C_Endianness', '-drop', 'C', '-tmpdir', './' + gen_dir_path + '/out', '-fsopt', '--cache_dir', '-fsopt', './' + gen_dir_path + '/out', '-no-prefix', 'Heartbleed', '-o', exec_file_path, 'heartbleed.fst', 'memcpy.c', gen_fstar_heartbleed_path]
     print('###command###')
-    print('$ ' + ' '.join(command))
+    print(' '.join(command))
     print('fstar_heartbleed.c````\n{}\n```\n'.format(fstar_heartbleed))
-    # print('###output###')
+    print('###output###')
     try:
         res = subprocess.check_output(command, stderr=subprocess.STDOUT).decode('utf-8', 'ignore')
         print(res)
@@ -140,7 +140,7 @@ def main():
 
     command = [exec_file_path]
     print('###command###')
-    print('$ ' + ' '.join(command))
+    print(' '.join(command))
     try:
         res = subprocess.check_output(command, stderr=subprocess.STDOUT).decode('utf-8', 'ignore')
         print(res)
