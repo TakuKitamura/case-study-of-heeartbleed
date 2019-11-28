@@ -33,18 +33,14 @@ val parse
   (ptr_request: B.buffer U8.t)
   (request_size: U32.t{U32.v request_size >= 3 && U32.v request_size <= 65535 + 2})
   (ptr_payload_length: B.buffer U32.t)
-  (ptr_error_code: B.buffer U8.t)
 : ST (B.buffer U8.t)
     (requires fun h -> B.live h ptr_request /\
       B.live h ptr_payload_length /\
-      B.live h ptr_error_code /\
       B.length ptr_request = U32.v request_size /\
       B.length ptr_payload_length = 1 /\
-      U32.v (Seq.index (B.as_seq h ptr_payload_length) 0) = 0 /\
-      B.length ptr_error_code = 1 /\
-      U8.v (Seq.index (B.as_seq h ptr_error_code) 0) = 0)
+      U32.v (Seq.index (B.as_seq h ptr_payload_length) 0) = 0)
     (ensures fun h1 _ h2 -> true)
-let parse ptr_request request_size ptr_payload_length ptr_error_code =
+let parse ptr_request request_size ptr_payload_length =
   let ptr_response: B.buffer U8.t = B.malloc HyperStack.root 0uy (U32.sub request_size 2ul) in
   let mb: U8.t = ptr_request.(0ul) in
   let lb: U8.t = ptr_request.(1ul) in
@@ -56,7 +52,7 @@ let parse ptr_request request_size ptr_payload_length ptr_error_code =
         ptr_payload_length.(0ul) <- paylaod_length;
         let ptr_request_offset: B.buffer U8.t = B.offset ptr_request 2ul in
         memcpy ptr_response ptr_request_offset paylaod_length
-      )
-  else
-    ptr_error_code.(0ul) <- 2uy;
+      );
+  // else
+  //   ptr_error_code.(0ul) <- 2uy;
   ptr_response
