@@ -53,6 +53,4 @@ let parse ptr_request request_size ptr_payload_length =
         let ptr_request_offset: B.buffer U8.t = B.offset ptr_request 2ul in
         memcpy ptr_response ptr_request_offset paylaod_length
       );
-  // else
-  //   ptr_error_code.(0ul) <- 2uy;
   ptr_response

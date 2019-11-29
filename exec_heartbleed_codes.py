@@ -43,6 +43,8 @@ def main():
 
     packet_data_list_str = ', '.join(packet_data_list)
 
+    print('packet_data=[{}]'.format(packet_data_list_str))
+
     array_size_str = str(len(packet_data) + 2)
 
     # print(array_size_str)
